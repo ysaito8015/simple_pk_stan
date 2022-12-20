@@ -15,12 +15,12 @@ parameters {
 transformed parameters {
   real KEL;     // Elimination rate constant (kel)
   vector[N] mu; // Calculated concentration
-  
+
   // Calculate kel from CL and Vd
   KEL = CL / VD;
-  
+
   // Analytical solution of 1 compartment model
-  mu = DOSE / VD * KA * (exp(-KA * TIME)-exp(-KEL * TIME))/(KEL-KA);
+  mu = DOSE / VD * KA * (exp(-KA * TIME) - exp(-KEL * TIME)) / (KEL - KA);
 }
 
 model {
@@ -28,14 +28,14 @@ model {
   KA ~ lognormal(log(0.5), 1);
   CL ~ lognormal(log(0.5), 1);
   VD ~ lognormal(log(5),   1);
-  
+
   // Assume Y follows log-normal distribution
   Y  ~ lognormal(log(mu),  s_Y);
 }
 
 generated quantities {
   vector[N] y_new;
-  
+
   for (n in 1:N){
     y_new[n]  = lognormal_rng(log(mu[n]), s_Y);
   }
