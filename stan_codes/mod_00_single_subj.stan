@@ -12,6 +12,7 @@ parameters {
   real<lower=0> s_Y; // SD of Y in log scale
 }
 
+// (ODE) Ordinary Differential Equations
 transformed parameters {
   real KEL;     // Elimination rate constant (kel)
   vector[N] mu; // Calculated concentration
@@ -25,9 +26,9 @@ transformed parameters {
 
 model {
   // Weak priors
-  KA ~ lognormal(log(0.5), 1);
-  CL ~ lognormal(log(0.5), 1);
-  VD ~ lognormal(log(5),   1);
+  KA ~ lognormal(log(0.5), 1);  // Absorption rate constant (ka)
+  CL ~ lognormal(log(0.5), 1);  // Clearance (CL)
+  VD ~ lognormal(log(5),   1);  // Volume of distribution (Vd)
 
   // Assume Y follows log-normal distribution
   Y  ~ lognormal(log(mu),  s_Y);
