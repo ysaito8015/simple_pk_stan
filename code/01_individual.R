@@ -27,7 +27,7 @@ print("summary of subject with dose data")
 print(summary(data.subj))
 print(head(data.subj))
 
-pdf("../outputs/01-data-pk-id1.pdf")
+pdf("../outputs/01/01-data-pk-id1.pdf")
   data.pk %>%
     filter(ID == 1) %>% 
     ggplot(aes(TIME, CONC)) + # CONC: concentration in blood
@@ -35,7 +35,7 @@ pdf("../outputs/01-data-pk-id1.pdf")
     geom_point() 
 dev.off()
 
-pdf("../outputs/01-data-pk-facet-by-dose.pdf")
+pdf("../outputs/01/01-data-pk-facet-by-dose.pdf")
   full_join(data.pk, data.subj) %>% 
     ggplot(aes(TIME, CONC, group=ID)) +
     geom_line() +
@@ -95,19 +95,19 @@ list.param <- c("KA", "CL", "VD", "s_Y")
 fit.param.plot <- 
   fit.param %>% filter(Parameter %in% c(list.param))
 
-pdf("../outputs/01-posterior-density-plot.pdf")
+pdf("../outputs/01/01-posterior-density-plot.pdf")
   ggs_density(fit.param.plot)
 dev.off()
 
-pdf("../outputs/01-posterior-trace-plot.pdf")
+pdf("../outputs/01/01-posterior-trace-plot.pdf")
   ggs_traceplot(fit.param.plot)
 dev.off()
 
-pdf("../outputs/01-posterior-autocorrelation-plot.pdf")
+pdf("../outputs/01/01-posterior-autocorrelation-plot.pdf")
   ggs_autocorrelation(fit.param.plot)
 dev.off()
 
-pdf("../outputs/01-posterior-rhat-plot.pdf")
+pdf("../outputs/01/01-posterior-rhat-plot.pdf")
   ggs_Rhat(fit.param.plot)
 dev.off()
 
@@ -121,7 +121,9 @@ y.pred.interval <-
   t() %>% 
   tibble::as_tibble()
 
-pdf("../outputs/01-estimate-mean-values-with-predicted-interval.pdf")
+print(y.pred.interval)
+
+pdf("../outputs/01/01-estimate-mean-values-with-predicted-interval.pdf")
   bind_cols(data.pk.id1,
             y.pred.interval) %>% 
     ggplot(aes(TIME, `50%`)) +
