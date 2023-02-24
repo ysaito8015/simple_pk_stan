@@ -16,13 +16,11 @@ data.pk   <- rio::import("../data/sim_pk_20170521.csv")
 data.subj <-rio::import("../data/subj_dose_20170521.csv") 
 # dbl (2): ID, DOSE
 
-print('')
-print("")
+cat("\n\n")
 print("summary of pk data")
 print(summary(data.pk))
 print(head(data.pk))
-print("")
-print("")
+cat("\n\n")
 print("summary of subject with dose data")
 print(summary(data.subj))
 print(head(data.subj))
@@ -46,8 +44,7 @@ dev.off()
 
 data.pk.id1 <- data.pk %>% filter(ID == 1)
 
-print("")
-print("")
+cat("\n\n")
 print("first 6 rows of pk data with ID:1")
 print(head(data.pk.id1))
 
@@ -66,8 +63,7 @@ data <-
        DOSE = 10,
        Y    = data.pk.id1$CONC)
 
-print("")
-print("")
+cat("\n\n")
 print("list data for stan")
 print(head(data))
 
@@ -81,8 +77,7 @@ fit.stan <-
   )
 
 
-print("")
-print("")
+cat("\n\n")
 print("results of stan simulation")
 print(fit.stan)
 
