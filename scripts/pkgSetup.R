@@ -3,15 +3,9 @@ pkgs <- c("tidyverse",
           "ggmcmc",
           "rstan")
 
-parentScriptDir <- getwd()  ## You may need to mod this to be in the top level of scriptDir
-pkgDir <- file.path(parentScriptDir, "pkg")
-dir.create(pkgDir)
-libDir <- file.path(parentScriptDir, "lib")
-dir.create(libDir)
-
+source("./environments.R")
 .libPaths(libDir)
 
-Sys.setenv("PKG_CXXFLAGS"="-std=c++20 -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION")
 
 #if (!require(c("devtools", "remotes"))) {
   install.packages(
